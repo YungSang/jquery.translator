@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery.Translator</title>
+
+    <style>
+      li span {
+        display: inline-block;
+        min-width: 200px;
+      }
+      li a[href="#translate"] {
+        display: none;
+        padding-left: 5px;
+        font-size: small;
+      }
+      li a[href="#translate"].translated {
+        background-color: #ffff00;
+      }
+    </style>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="jquery.translator.js"></script>
+    <script>
+      $(function() {
+        // Initialization
+        $('ul li').translatable({
+          contentNodeSelector     : 'span.content'
+        , translateButtonSelector : 'a[href="#translate"]'
+//        , autoChangeButtonText    : false
+//        , language                : 'en'
+//        , debug                   : true
+        });
+
+        // In case the translator is not ready, it's ok.
+        $('<li><span class="content">This is a test.</span><span><a href="#translate">Translate</a></span></li>')
+          .appendTo('ul')
+          .translatable();
+
+        // In case of "dynamic insertion", it's ok as well.
+        $('button').click(function() {
+          var $li = $('<li><span class="content">This is a test.</span><span><a href="#translate">Translate</a></span></li>')
+            .appendTo('ul')
+            .translatable();
+        })
+      });
+    </script>
+</head>
+<body>
+
+  <button>Add</button>
+
+  <ul>
+    <li><span class="content">This is a test.</span><a href="#translate">Translate</a></li>
+    <li><span class="content">This is a test.</span><a href="#translate">Translate</a></li>
+    <li><span class="content">これはテストです。</span><a href="#translate">Translate</a></li>
+    <li><span class="content">これはテストです。</span><a href="#translate">Translate</a></li>
+  </ul>
+
+</body>
+</html>
